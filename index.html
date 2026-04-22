@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026 제품 제작 아이디어 자판기</title>
-    <!-- 디자인을 위한 꼬리표(Tailwind CSS) 불러오기 -->
+    <!-- 디자인을 위한 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 기본 폰트 설정 */
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; }
         
-        /* 자판기 돌아가는 애니메이션 효과 */
+        /* 슬롯 애니메이션 효과 */
         .slot-box { transition: all 0.2s ease; }
         .spinning { 
             animation: pulse 0.4s infinite; 
@@ -21,7 +20,6 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(0.95); opacity: 0.7; }
         }
-        /* 모바일 터치 최적화 */
         button { touch-action: manipulation; }
     </style>
 </head>
@@ -43,51 +41,64 @@
             <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-4">
                 <h3 class="font-bold text-indigo-900 mb-1">🛠️ 사용 재료 리마인드</h3>
                 <p class="text-indigo-700 text-sm break-keep">
-                    <span class="font-bold bg-indigo-200 px-1 rounded">목재(소나무 블럭)</span>, <span class="font-bold bg-indigo-200 px-1 rounded">열가소성 플라스틱(슈링클스)</span>, <span class="font-bold bg-indigo-200 px-1 rounded">금속(알루미늄 철사)</span>의 특성을 고려해 제작할 수 있는 제품이어야 합니다.
+                    <span class="font-bold bg-indigo-200 px-1 rounded text-xs md:text-sm">목재(소나무 블럭)</span>, 
+                    <span class="font-bold bg-indigo-200 px-1 rounded text-xs md:text-sm">열가소성 플라스틱(슈링클스)</span>, 
+                    <span class="font-bold bg-indigo-200 px-1 rounded text-xs md:text-sm">금속(알루미늄 철사)</span>의 특성을 고려해 제작할 수 있는 제품이어야 합니다.
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- 단어 추첨기(자판기) 영역 -->
+    <!-- 자판기 본체 -->
     <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 md:p-8">
+        
         <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
             <h2 class="text-xl font-bold text-indigo-900">🎲 창의력 팡팡 아이디어 자판기</h2>
+            <!-- 원래 버전의 깔끔한 네모 버튼 -->
             <button onclick="drawAll()" class="w-full md:w-auto px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition-transform active:scale-95 cursor-pointer">
-                새로운 조합 뽑기!
+                3개 조건 모두 바꾸기
             </button>
         </div>
 
+        <!-- 슬롯 그리드 -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <!-- Slot 1: 대상/상황 -->
             <div class="flex flex-col gap-2 relative">
-                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-pink-100 text-pink-700 text-xs font-bold px-3 py-1 rounded-full z-10 border border-pink-200 shadow-sm whitespace-nowrap">
-                    1. 대상/상황
-                </div>
-                <div id="slot0" class="slot-box bg-pink-50 border-2 border-pink-300 rounded-2xl h-32 flex items-center justify-center shadow-sm text-2xl md:text-3xl font-black text-slate-800 break-keep text-center px-2 mt-2">?</div>
-                <button onclick="drawOne(0)" class="text-sm text-pink-600 font-semibold hover:bg-pink-100 py-3 md:py-2 rounded-lg transition-colors border border-pink-200 cursor-pointer">이 조건만 바꾸기</button>
+                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-pink-100 text-pink-700 text-xs font-bold px-3 py-1 rounded-full z-10 border border-pink-200 shadow-sm whitespace-nowrap">1. 대상/상황</div>
+                <div id="slot0" class="slot-box bg-pink-50 border-2 border-pink-300 rounded-2xl h-32 flex items-center justify-center shadow-sm text-2xl font-black text-slate-800 break-keep text-center px-2 mt-2">?</div>
+                <button onclick="drawOne(0)" class="text-sm text-pink-600 font-semibold hover:bg-pink-100 py-2 rounded-lg border border-pink-200 cursor-pointer">이 조건만 바꾸기</button>
             </div>
             
             <!-- Slot 2: 기능 -->
             <div class="flex flex-col gap-2 relative">
-                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full z-10 border border-purple-200 shadow-sm whitespace-nowrap">
-                    2. 기능
-                </div>
-                <div id="slot1" class="slot-box bg-purple-50 border-2 border-purple-300 rounded-2xl h-32 flex items-center justify-center shadow-sm text-2xl md:text-3xl font-black text-slate-800 break-keep text-center px-2 mt-2">?</div>
-                <button onclick="drawOne(1)" class="text-sm text-purple-600 font-semibold hover:bg-purple-100 py-3 md:py-2 rounded-lg transition-colors border border-purple-200 cursor-pointer">이 조건만 바꾸기</button>
+                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full z-10 border border-purple-200 shadow-sm whitespace-nowrap">2. 기능</div>
+                <div id="slot1" class="slot-box bg-purple-50 border-2 border-purple-300 rounded-2xl h-32 flex items-center justify-center shadow-sm text-2xl font-black text-slate-800 break-keep text-center px-2 mt-2">?</div>
+                <button onclick="drawOne(1)" class="text-sm text-purple-600 font-semibold hover:bg-purple-100 py-2 rounded-lg border border-purple-200 cursor-pointer">이 조건만 바꾸기</button>
             </div>
             
-            <!-- Slot 3: 제작할 제품 -->
+            <!-- Slot 3: 제품 -->
             <div class="flex flex-col gap-2 relative">
-                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full z-10 border border-blue-200 shadow-sm whitespace-nowrap">
-                    3. 제작할 제품
-                </div>
-                <div id="slot2" class="slot-box bg-blue-50 border-2 border-blue-300 rounded-2xl h-32 flex items-center justify-center shadow-sm text-2xl md:text-3xl font-black text-slate-800 break-keep text-center px-2 mt-2">?</div>
-                <button onclick="drawOne(2)" class="text-sm text-blue-600 font-semibold hover:bg-blue-100 py-3 md:py-2 rounded-lg transition-colors border border-blue-200 cursor-pointer">이 조건만 바꾸기</button>
+                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full z-10 border border-blue-200 shadow-sm whitespace-nowrap">3. 제품</div>
+                <div id="slot2" class="slot-box bg-blue-50 border-2 border-blue-300 rounded-2xl h-32 flex items-center justify-center shadow-sm text-2xl font-black text-slate-800 break-keep text-center px-2 mt-2">?</div>
+                <button onclick="drawOne(2)" class="text-sm text-blue-600 font-semibold hover:bg-blue-100 py-2 rounded-lg border border-blue-200 cursor-pointer">이 조건만 바꾸기</button>
+            </div>
+        </div>
+
+        <!-- 생각 징검다리 질문 (가이드) -->
+        <div id="thinkingGuide" class="hidden bg-amber-50 border-2 border-amber-200 rounded-2xl p-6 mb-8 text-center animate-in fade-in duration-500">
+            <h3 class="text-amber-800 font-bold mb-3 flex items-center justify-center gap-2">
+                💡 생각의 연결 고리 찾기
+            </h3>
+            <p id="guideSentence" class="text-lg md:text-xl font-bold text-slate-800 break-keep leading-relaxed mb-4">
+                <!-- 자바스크립트로 문장 생성 -->
+            </p>
+            <div class="pt-4 border-t border-amber-200 text-left md:text-center text-amber-900 text-sm md:text-base font-medium space-y-3">
+                <p>👉 이 제품은 <strong>용도/기능</strong>이 있는 제품인가요?</p>
+                <p>👉 <strong>목재, 금속, 플라스틱</strong>을 이용해 이 제품을 만들 수 있을까요?</p>
             </div>
         </div>
         
-        <!-- 아이디어 제출 영역 -->
+        <!-- 제출 영역 -->
         <div class="bg-slate-50 p-6 md:p-8 rounded-2xl border border-slate-200 text-center">
             <h3 class="font-extrabold text-2xl md:text-3xl text-slate-800 mb-4">📝 떠오른 아이디어 제출하기!</h3>
             <p class="text-slate-600 text-base md:text-lg mb-6 break-keep">
@@ -95,95 +106,72 @@
                 아래에서 <strong>자신의 반 버튼</strong>을 누르면 구글 폼으로 이동합니다.
             </p>
             
-            <!-- 14개 반 버튼이 깔끔하게 나열될 공간 -->
             <div id="classButtons" class="grid grid-cols-4 md:grid-cols-7 gap-3 max-w-2xl mx-auto">
-                <!-- 자바스크립트가 자동으로 14개 버튼을 여기에 그려줍니다 -->
+                <!-- 자바스크립트로 14개 버튼 생성 -->
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    // 1. 카테고리별 단어장 분리 (구체적이지 않은 포괄적, 추상적 개념 위주로 재구성)
+    // 1. 단어 데이터셋
     const BANKS = [
-        // Slot 1: 대상 / 상황 (누구를 위해? 언제 쓰지?) - 확장성을 가진 대상/공간/시간/상태
-        [
-            '나 자신', '타인', '우리', '가족', '동급생', '선생님', '반려동물', '식물', '다수', '개인',
-            '낯선 사람', '바쁜 사람', '여유로운 사람', '예민한 사람', '둔감한 사람', '덜렁대는 사람', '꼼꼼한 사람', '활동적인 사람', '조용한 사람',
-            '화가 난 사람', '슬픈 사람', '기쁜 사람', '우울한 사람', '피곤한 사람', '활기찬 사람', '아픈 사람', '집중하는 사람', '산만한 사람', '심심한 사람',
-            '아침', '점심', '저녁', '밤', '새벽', '해 뜰 때', '해 질 때', '계절이 바뀔 때', '맑은 날', '흐린 날',
-            '비 오는 날', '눈 오는 날', '바람 부는 날', '쉬는 시간', '수업 시간', '식사 시간', '이동 시간', '방학', '주말', '시험 기간',
-            '넓은 공간', '좁은 공간', '높은 곳', '낮은 곳', '밝은 곳', '어두운 곳', '시끄러운 곳', '조용한 곳', '따뜻한 곳', '차가운 곳',
-            '위험한 곳', '안전한 곳', '실내', '야외', '개인 공간', '공용 공간', '경계선', '구석진 곳', '가운데', '바닥',
-            '벽면', '천장', '창가', '통로', '멈춰있을 때', '기다릴 때', '서두를 때', '잠잘 때', '잠에서 깰 때', '씻을 때',
-            '먹을 때', '공부할 때', '놀 때', '운동할 때', '청소할 때', '정리할 때', '길을 걸을 때', '무언가를 볼 때', '대화할 때',
-            '혼자 있을 때', '여럿이 있을 때', '시작할 때', '끝날 때', '집중이 필요할 때', '휴식이 필요할 때', '도움이 필요할 때', '기억해야 할 때', '잊고 싶을 때'
-        ],
-        // Slot 2: 기능 / 상태 / 특징 (기계적 기능이 아닌 물리적, 형태적 작용 위주)
-        [
-            '접히는', '펼쳐지는', '늘어나는', '줄어드는', '팽창하는', '수축하는', '구부러지는', '휘어지는', '꺾이는', '꼬이는',
-            '회전하는', '빙글빙글 도는', '흔들리는', '진동하는', '굴러가는', '미끄러지는', '튕기는', '솟아오르는', '가라앉는', '멈추는',
-            '조립되는', '분해되는', '합체되는', '분리되는', '끼워지는', '빠지는', '붙는', '떨어지는', '묶이는', '풀리는',
-            '얽히는', '겹쳐지는', '포개지는', '빛나는', '반짝이는', '깜빡이는', '어두워지는', '색이 변하는', '투명해지는', '불투명해지는',
-            '소리 나는', '조용해지는', '향기 나는', '냄새를 없애는', '따뜻해지는', '차가워지는', '부드러운', '거친', '딱딱한', '말랑한',
-            '푹신한', '끈적이는', '튼튼한', '연약한', '가벼운', '무거운', '보호하는', '방어하는', '가리는', '보여주는',
-            '숨기는', '막아주는', '통과시키는', '거르는', '모으는', '흩어지게 하는', '나누는', '섞는', '고정하는', '받쳐주는',
-            '지지하는', '매달리는', '떠받치는', '알려주는', '경고하는', '안내하는', '기록하는', '측정하는', '기억하는', '정리하는',
-            '청소하는', '보관하는', '담는', '쏟는', '변신하는', '열리는', '닫히는', '잠기는', '비우는', '채우는',
-            '던지는', '받는', '밀어내는', '당기는', '들어 올리는', '내리는', '누르는', '감싸는', '덮는', '씌우는',
-            '묶어주는', '걸어주는', '세우는', '눕히는', '펴는', '말아주는', '지탱하는', '버티는', '흡수하는', '반사하는'
-        ],
-        // Slot 3: 제작할 제품 (완성품 이름이 아닌 형태, 구조, 쓰임새의 범주)
-        [
-            '보관함', '거치대', '스탠드', '받침대', '걸이', '홀더', '클립', '집게', '지지대', '기둥',
-            '다리', '뼈대', '관절', '연결고리', '매듭', '고리', '나사못 역할', '끈', '밴드', '자물쇠',
-            '열쇠', '덮개', '마개', '뚜껑', '가림막', '파티션', '칸막이', '방패', '완충재', '패드',
-            '케이스', '포장', '껍질', '장식품', '액자 형태', '모빌 형태', '팻말', '명찰', '이름표', '간판',
-            '알림판', '표지판', '알람 기구', '시계 형태', '달력 형태', '조명 갓', '스위치', '버튼', '손잡이', '바퀴',
-            '날개', '프로펠러', '지렛대', '펌프 구조', '필터', '붓 형태', '솔', '주걱 형태', '바구니', '주머니',
-            '상자', '원통', '꽂이', '폴더', '지갑 형태', '서랍', '선반', '쟁반', '그릇 형태', '컵 형태',
-            '접시 형태', '옷걸이 형태', '수건걸이 형태', '깔개', '매트', '커버', '지붕 형태', '바닥 판', '벽면', '문 형태',
-            '창문 형태', '계단 형태', '사다리', '미끄럼틀 형태', '터널 구조', '파이프', '관', '스프링', '태엽 구조', '톱니바퀴',
-            '거울 틀', '렌즈 틀', '틀', '프레임', '판', '선형 구조', '면 구조', '입체 구조', '모형', '장난감',
-            '보조기구', '도구', '도구함', '안전장비', '휴대용 기구', '고정형 기구', '조립 키트', '모듈', '블럭', '퍼즐'
-        ]
+        ['나 자신', '타인', '우리', '가족', '동급생', '선생님', '반려동물', '식물', '다수', '개인',
+        '낯선 사람', '바쁜 사람', '여유로운 사람', '예민한 시람', '둔감한 사람', '덜렁대는 사람', '꼼꼼한 사람', '활동적인 사람', '조용한 사람',
+        '화가 난 사람', '슬픈 사람', '기쁜 사람', '우울한 사람', '피곤한 사람', '활기찬 사람', '아픈 사람', '집중하는 사람', '산만한 사람', '심심한 사람',
+        '아침', '점심', '저녁', '밤', '새벽', '해 뜰 때', '해 질 때', '계절이 바뀔 때', '맑은 날', '흐린 날',
+        '비 오는 날', '눈 오는 날', '바람 부는 날', '쉬는 시간', '수업 시간', '식사 시간', '이동 시간', '방학', '주말', '시험 기간',
+        '넓은 공간', '좁은 공간', '높은 곳', '낮은 곳', '밝은 곳', '어두운 곳', '시끄러운 곳', '조용한 곳', '따뜻한 곳', '차가운 곳',
+        '위험한 곳', '안전한 곳', '실내', '야외', '개인 공간', '공용 공간', '경계선', '구석진 곳', '가운데', '바닥',
+        '벽면', '천장', '창가', '통로', '멈춰있을 때', '기다릴 때', '서두를 때', '잠잘 때', '잠에서 깰 때', '씻을 때',
+        '먹을 때', '공부할 때', '놀 때', '운동할 때', '청소할 때', '정리할 때', '길을 걸을 때', '무언가를 볼 때', '대화할 때',
+        '혼자 있을 때', '여럿이 있을 때', '시작할 때', '끝날 때', '집중이 필요할 때', '휴식이 필요할 때', '도움이 필요할 때', '기억해야 할 때', '잊고 싶을 때'],
+        
+        ['접히는', '펼쳐지는', '늘어나는', '줄어드는', '팽창하는', '수축하는', '구부러지는', '휘어지는', '꺾이는', '꼬이는',
+        '회전하는', '빙글빙글 도는', '흔들리는', '진동하는', '굴러가는', '미끄러지는', '튕기는', '솟아오르는', '가라앉는', '멈추는',
+        '조립되는', '분해되는', '합체되는', '분리되는', '끼워지는', '빠지는', '붙는', '떨어지는', '묶이는', '풀리는',
+        '얽히는', '겹쳐지는', '포개지는', '빛나는', '반짝이는', '깜빡이는', '어두워지는', '색이 변하는', '투명해지는', '불투명해지는',
+        '소리 나는', '조용해지는', '향기 나는', '냄새를 없애는', '따뜻해지는', '차가워지는', '부드러운', '거친', '딱딱한', '말랑한',
+        '푹신한', '끈적이는', '튼튼한', '연약한', '가벼운', '무거운', '보호하는', '방어하는', '가리는', '보여주는',
+        '숨기는', '막아주는', '통과시키는', '거르는', '모으는', '흩어지게 하는', '나누는', '섞는', '고정하는', '받쳐주는',
+        '지지하는', '매달리는', '떠받치는', '알려주는', '경고하는', '안내하는', '기록하는', '측정하는', '기억하는', '정리하는',
+        '청소하는', '보관하는', '담는', '쏟는', '변신하는', '열리는', '닫히는', '잠기는', '비우는', '채우는',
+        '던지는', '받는', '밀어내는', '당기는', '들어 올리는', '내리는', '누르는', '감싸는', '덮는', '씌우는',
+        '묶어주는', '걸어주는', '세우는', '눕히는', '펴는', '말아주는', '지탱하는', '버티는', '흡수하는', '반사하는'],
+        
+        ['보관함', '거치대', '스탠드', '받침대', '걸이', '홀더', '클립', '집게', '지지대', '기둥',
+        '다리', '뼈대', '관절', '연결고리', '매듭', '고리', '나사못 역할', '끈', '밴드', '자물쇠',
+        '열쇠', '덮개', '마개', '뚜껑', '가림막', '파티션', '칸막이', '방패', '완충재', '패드',
+        '케이스', '포장', '껍질', '장식품', '액자 형태', '모빌 형태', '팻말', '명찰', '이름표', '간판',
+        '알림판', '표지판', '알람 기구', '시계 형태', '달력 형태', '조명 갓', '스위치', '버튼', '손잡이', '바퀴',
+        '날개', '프로펠러', '지렛대', '펌프 구조', '필터', '붓 형태', '솔', '주걱 형태', '바구니', '주머니',
+        '상자', '원통', '꽂이', '폴더', '지갑 형태', '서랍', '선반', '쟁반', '그릇 형태', '컵 형태',
+        '접시 형태', '옷걸이 형태', '수건걸이 형태', '깔개', '매트', '커버', '지붕 형태', '바닥 판', '벽면', '문 형태',
+        '창문 형태', '계단 형태', '사다리', '미끄럼틀 형태', '터널 구조', '파이프', '관', '스프링', '태엽 구조', '톱니바퀴',
+        '거울 틀', '렌즈 틀', '틀', '프레임', '판', '선형 구조', '면 구조', '입체 구조', '모형', '장난감',
+        '보조기구', '도구', '도구함', '안전장비', '휴대용 기구', '고정형 기구', '조립 키트', '모듈', '블럭', '퍼즐']
     ];
 
     let currentWords = ['?', '?', '?'];
 
-    // 2. 각 반별 구글 폼 주소 세팅
-    // ★ 여기에 선생님의 1~14반 실제 구글 폼 링크를 넣어주세요!
+    // 2. 반별 구글 폼 링크
     const formLinks = {
-        1: "https://forms.gle/9jhvMxW9gxbymGDG6",
-        2: "https://forms.gle/21FtcUTiBXjoffP68",
-        3: "https://forms.gle/ueby9sMnJKJj5FhP9",
-        4: "https://forms.gle/6G9DN4wmkKbQhN3G7",
-        5: "https://forms.gle/FArgnnwTgFVAr6cw8",
-        6: "https://forms.gle/9NyYzYZpTL2amxra8",
-        7: "https://forms.gle/Kgcpq88szptapVGH9",
-        8: "https://forms.gle/rpKwLHSA7UmaNUmv9",
-        9: "https://forms.gle/exNRDuehQvhnpsiT8",
-        10: "https://forms.gle/zH61Gd2uMUxQ7zRR7",
-        11: "https://forms.gle/BxXV86CeacN2xv847",
-        12: "https://forms.gle/z2VNeqhSCVSbytz3A",
-        13: "https://forms.gle/jc2fiurnGF5CWMaj9",
-        14: "https://forms.gle/bXNv6NvSXEuhdanR9"
+        1: "https://forms.gle/주소1", 2: "https://forms.gle/주소2", 3: "https://forms.gle/주소3",
+        4: "https://forms.gle/주소4", 5: "https://forms.gle/주소5", 6: "https://forms.gle/주소6",
+        7: "https://forms.gle/주소7", 8: "https://forms.gle/주소8", 9: "https://forms.gle/주소9",
+        10: "https://forms.gle/주소10", 11: "https://forms.gle/주소11", 12: "https://forms.gle/주소12",
+        13: "https://forms.gle/주소13", 14: "https://forms.gle/주소14"
     };
 
-    // 화면 렌더링 시 14개 버튼 생성
     window.onload = function() {
         const btnContainer = document.getElementById('classButtons');
         for(let i = 1; i <= 14; i++) {
             const btn = document.createElement('button');
             btn.innerText = i + '반';
-            btn.className = 'py-3 bg-white border-2 border-indigo-200 text-indigo-700 rounded-xl hover:bg-indigo-600 hover:text-white hover:border-indigo-600 font-bold transition-all shadow-sm cursor-pointer';
-            btn.onclick = function() {
-                const link = formLinks[i];
-                if(link && link.includes('forms.gle')) {
-                    window.open(link, '_blank');
-                } else {
-                    alert(i + '반의 구글 폼 주소가 아직 준비되지 않았습니다. (코드에 링크를 넣어주세요)');
-                }
+            btn.className = 'py-3 bg-white border-2 border-indigo-200 text-indigo-700 rounded-xl hover:bg-indigo-600 hover:text-white font-bold transition-all shadow-sm cursor-pointer';
+            btn.onclick = () => {
+                if(formLinks[i].includes('주소')) alert(i + '반 링크가 설정되지 않았습니다.');
+                else window.open(formLinks[i], '_blank');
             };
             btnContainer.appendChild(btn);
         }
@@ -210,14 +198,22 @@
         
         setTimeout(() => {
             let newWord;
-            do {
-                newWord = getRandomWord(index);
-            } while (currentWords[index] === newWord); // 같은 칸에서 연속으로 같은 단어 나오는 것 방지
-            
+            do { newWord = getRandomWord(index); } while (currentWords[index] === newWord);
             currentWords[index] = newWord;
             slot.innerText = newWord;
             slot.classList.remove('spinning');
+            
+            // 단어가 하나씩 멈출 때마다 확인해서, 3개가 다 차면 무조건 징검다리 띄우기
+            showThinkingGuide();
         }, 400);
+    }
+
+    function showThinkingGuide() {
+        if(currentWords.includes('?')) return;
+        const guideDiv = document.getElementById('thinkingGuide');
+        const sentence = document.getElementById('guideSentence');
+        guideDiv.classList.remove('hidden');
+        sentence.innerHTML = `"<span class="text-pink-600 underline decoration-pink-300 underline-offset-4">${currentWords[0]}</span>" 상황에서 사용할 수 있는, <br class="hidden md:block">"<span class="text-purple-600 underline decoration-purple-300 underline-offset-4">${currentWords[1]}</span>" 성질을 가진 "<span class="text-blue-600 underline decoration-blue-300 underline-offset-4">${currentWords[2]}</span>"을(를) 활용한/와 관련된 무언가를 만든다면?`;
     }
 </script>
 </body>
